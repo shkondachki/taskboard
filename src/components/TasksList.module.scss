@@ -1,0 +1,26 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+
+.tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.filter {
+  margin-bottom: 20px;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  [class*="filterGroup"]{
+    max-width: 200px;
+    width: 100%;
+  }
+
+  .count {
+    font-size: $font-size-sm;
+  }
+}

@@ -1,0 +1,59 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.taskItem {
+  background: $dark-platinum;
+  border-radius: $radius-md;
+  padding: $spacing-lg $spacing-lg;
+  overflow: hidden;
+  border-left: 3px solid transparent;
+  position: relative;
+
+  &.todo {
+    border-color: red;
+  }
+
+  &.in-progress {
+    border-color: #70b7f8;
+  }
+
+  &.done {
+    border-color: green;
+  }
+
+  .actions {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    display: flex;
+    gap: $spacing-sm;
+    flex-shrink: 0;
+
+    [class*="lucide-pencil"] {
+      padding: 3px;
+    }
+
+    .actionBtn {
+      cursor: pointer;
+      transition: all $transition-base;
+    }
+  }
+
+  .status {
+    display: inline-block;
+    padding: 3px 12px;
+    background: $platinum;
+    border-radius: $radius-pill;
+    font-size: $font-size-xs;
+    margin-bottom: 15px;
+  }
+
+  .title {
+    font-size: $font-size-xl;
+    margin-bottom: 15px;
+  }
+
+  .createdAt {
+    font-size: $font-size-sm;
+  }
+}

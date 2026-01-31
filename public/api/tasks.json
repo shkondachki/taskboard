@@ -1,0 +1,20 @@
+[
+  {
+    "id": "1",
+    "title": "Setup project",
+    "status": "Todo",
+    "createdAt": "2024-01-01T10:00:00.000Z"
+  },
+  {
+    "id": "2",
+    "title": "Build UI",
+    "status": "In-Progress",
+    "createdAt": "2024-01-02T12:00:00.000Z"
+  },
+  {
+    "id": "3",
+    "title": "Build a Landing Page",
+    "status": "Done",
+    "createdAt": "2024-01-02T12:00:00.000Z"
+  }
+]
