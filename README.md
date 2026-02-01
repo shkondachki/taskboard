@@ -80,7 +80,7 @@ This keeps components focused on **rendering**, not business logic.
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/taskboard.git
+git clone https://github.com/shkondachki/taskboard.git
 cd taskboard
 ```
 
