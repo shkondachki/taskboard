@@ -9,16 +9,32 @@
   border-left: 3px solid transparent;
   position: relative;
 
+  @include mobile {
+    padding: $spacing-md $spacing-md;
+  }
+
   &.todo {
-    border-color: red;
+    border-color: $status-todo;
+
+    .status {
+      background: $status-todo;
+    }
   }
 
   &.in-progress {
-    border-color: #70b7f8;
+    border-color: $status-progress;
+
+    .status {
+      background: $status-progress;
+    }
   }
 
   &.done {
-    border-color: green;
+    border-color: $status-done;
+
+    .status {
+      background: $status-done;
+    }
   }
 
   .actions {
@@ -44,8 +60,10 @@
     padding: 3px 12px;
     background: $platinum;
     border-radius: $radius-pill;
-    font-size: $font-size-xs;
+    font-size: 11px;
     margin-bottom: 15px;
+    font-weight: $font-weight-medium;
+    text-transform: uppercase;
   }
 
   .title {

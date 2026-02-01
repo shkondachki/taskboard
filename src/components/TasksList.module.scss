@@ -1,6 +1,15 @@
 @use '../styles/variables' as *;
 @use '../styles/mixins' as *;
 
+.content {
+  display: grid;
+  gap: 40px;
+
+  @include desktop {
+    grid-template-columns: 1.5fr 1fr;
+    gap: 80px;
+  }
+}
 
 .tasks {
   display: flex;

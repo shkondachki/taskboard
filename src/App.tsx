@@ -1,6 +1,5 @@
 import styles from './App.module.scss'
 import TasksList from "./components/TasksList.tsx";
-import TaskForm from "./components/TaskForm";
 
 function App() {
 
@@ -9,13 +8,8 @@ function App() {
       <div className={styles.wrapper}>
         <h1>Tasks</h1>
 
-        <div className={styles.content}>
-          <TasksList />
-          <TaskForm />
-        </div>
-
+        <TasksList />
       </div>
-
     </div>
   )
 }

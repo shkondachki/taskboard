@@ -7,14 +7,9 @@
 .wrapper {
   max-width: 1100px;
   margin: 50px auto;
+  padding: 20px;
 
   h1 {
     margin-bottom: 20px;
-  }
-
-  .content {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: 80px;
   }
 }
