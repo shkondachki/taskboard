@@ -1,73 +1,126 @@
-# React + TypeScript + Vite
+# 📝 Task Manager App (React + TypeScript)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple task management application built with **React**, **TypeScript**, and **localStorage persistence**.
 
-Currently, two official plugins are available:
+The app supports creating, editing, deleting, and filtering tasks, with a clean separation between UI and data logic.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project was built to practice **React fundamentals, custom hooks, controlled forms, and state management without external libraries**.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Features
 
-## Expanding the ESLint configuration
+- ✅ Create tasks with title and status
+- ✏️ Edit existing tasks
+- ❌ Delete tasks
+- 🔍 Filter tasks by status (All / Todo / In-Progress / Done)
+- 💾 Persist tasks using `localStorage`
+- 🧠 Custom React hook for task logic
+- 🧾 Controlled form with validation
+- 🔁 Single form reused for Create & Edit
+- 🧩 Typed with TypeScript end-to-end
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🛠 Tech Stack
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- **React**
+- **TypeScript**
+- **SCSS Modules**
+- **localStorage** (persistence)
+- **Vite** (or CRA, depending on your setup)
+
+No external state management libraries were used.
+
+---
+
+## 🧠 Architecture Decisions
+
+### Custom Hook (`useTasks`)
+
+All task-related logic is centralized in a custom hook:
+
+- Initial load from `localStorage`
+- Fallback to dummy JSON data
+- Create / Update / Delete operations
+- Automatic persistence on state changes
+
+This keeps components focused on **rendering**, not business logic.
+
+---
+
+### Single Source of Truth
+
+- The task list is managed only inside `useTasks`
+- UI components never mutate state directly
+- Filtered tasks are derived state, not duplicated data
+
+---
+
+### Form Design
+
+- One form handles both **Create** and **Edit**
+- When editing, task data is injected into the form
+- Cancel action exits edit mode without mutating data
+- Validation is handled at the form level
+
+---
+
+## 🧪 Validation Rules
+
+- Title is required
+- Empty or whitespace-only titles are rejected
+- Validation errors are displayed inline
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/your-username/taskboard.git
+cd taskboard
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Install dependencies
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
+
+### 3. Start the development server
+
+```bash
+npm run dev
+```
+
+---
+
+## 🗂 Initial Data
+
+On first load:
+
+- Tasks are loaded from a local JSON file
+- The data is saved into `localStorage`
+- All subsequent operations use `localStorage`
+
+---
+
+## 🎯 Learning Goals
+
+This project focuses on:
+
+- Proper React state management
+- Custom hooks
+- Controlled components
+- Type safety with TypeScript
+- Avoiding over-engineering
+- Clean and maintainable structure
+
+---
+
+## 📄 License
+
+MIT License
