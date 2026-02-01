@@ -41,6 +41,24 @@ export default function TaskForm({
     setErrors({});
   }, [initialData]);
 
+  // Handle ESC
+  useEffect(() => {
+    if (!initialData || !onCancel) return;
+
+    const handleKeydown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onCancel();
+      }
+    }
+
+    window.addEventListener("keydown", handleKeydown)
+
+    return () => {
+      window.removeEventListener("keydown", handleKeydown)
+    }
+
+  }, [initialData, onCancel]);
+
   const validate = () => {
     const newErrors: { title?: string } = {};
 
@@ -118,7 +136,18 @@ export default function TaskForm({
           </select>
         </div>
 
-        <div className="formData">
+        <div className={`formData ${styles.buttonActions}`}>
+          {initialData && onCancel && (
+            <button
+              type="button"
+              className="btn-secondary full-width"
+              onClick={handleCancel}
+              disabled={isSubmitting}
+            >
+              Cancel
+            </button>
+          )}
+
           <button
             type="submit"
             className="btn-primary full-width"
@@ -126,17 +155,6 @@ export default function TaskForm({
           >
             {initialData ? "Update Task" : "Create Task"}
           </button>
-
-          {initialData && onCancel && (
-            <button
-              type="button"
-              className="btn-secondary"
-              onClick={handleCancel}
-              disabled={isSubmitting}
-            >
-              Cancel
-            </button>
-          )}
         </div>
       </form>
     </div>
