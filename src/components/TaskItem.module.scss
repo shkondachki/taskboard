@@ -52,6 +52,9 @@
     .actionBtn {
       cursor: pointer;
       transition: all $transition-base;
+      background: none;
+      border: none;
+      color: $light-platinum;
     }
   }
 

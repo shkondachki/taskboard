@@ -29,7 +29,8 @@ export function useTasks() {
         }
       }
       catch (err) {
-        setError("Failed to load tasks");
+        setError(err instanceof Error ? err.message : "Failed to load tasks");
+        console.error("Failed to load tasks", err);
       }
       finally {
         setIsLoading(false);
@@ -41,9 +42,9 @@ export function useTasks() {
 
   // Persist on every tasks change (after initial load)
   useEffect(() => {
-    if (!isLoading) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
-    }
+    if (isLoading) return
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
   }, [tasks, isLoading]);
 
   // Create Task

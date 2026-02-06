@@ -36,21 +36,21 @@ const TaskItem = memo(function TaskItem({
       </div>
 
       <div className={styles.actions}>
-        <div
+        <button
           className={`${styles.actionBtn} ${styles.edit}`}
           onClick={() => onEdit?.(task)}
           aria-label="Edit task"
         >
           <Pencil size={22} />
-        </div>
+        </button>
 
-        <div
+        <button
           className={`${styles.actionBtn} ${styles.delete}`}
           onClick={() => onDelete?.(task.id)}
           aria-label="Delete task"
         >
           <X size={22} />
-        </div>
+        </button>
       </div>
     </div>
   );

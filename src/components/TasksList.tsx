@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useState } from "react";
+import {useCallback, useMemo, useState} from "react";
 import styles from "./TasksList.module.scss";
 
 import TaskItem from "./TaskItem";
@@ -19,16 +19,14 @@ export default function TasksList() {
 
   const [selectedStatus, setSelectedStatus] = useState<Status | "all">("all");
   const [editingTask, setEditingTask] = useState<Task | null>(null);
-  const [filteredTasks, setFilteredTasks] = useState<Task[]>([]);
 
-  // Recalculate filtered tasks
-  useEffect(() => {
+  // Filter tasks by status
+  const filteredTasks = useMemo(() => {
     if (selectedStatus === "all") {
-      setFilteredTasks(tasks);
-    } else {
-      setFilteredTasks(tasks.filter(task => task.status === selectedStatus));
+      return tasks;
     }
-  }, [tasks, selectedStatus]);
+    return tasks.filter(task => task.status === selectedStatus);
+  }, [tasks, selectedStatus])
 
   // Filter handler
   const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -67,7 +65,7 @@ export default function TasksList() {
     if (editingTask?.id === id) {
       setEditingTask(null);
     }
-  }, [deleteTask]);
+  }, [deleteTask, setEditingTask]);
 
   if (isLoading) return <p>Loading tasks…</p>;
   if (error) return <p>{error}</p>;
@@ -109,9 +107,8 @@ export default function TasksList() {
               <TaskItem
                 task={task}
                 key={task.id}
-                {...task}
-                onEdit={() => handleStartEdit(task)}
-                onDelete={() => handleDelete(task.id)}
+                onEdit={handleStartEdit}
+                onDelete={handleDelete}
               />
             ))
           ) : (

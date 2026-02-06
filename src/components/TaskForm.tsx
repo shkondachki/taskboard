@@ -26,6 +26,7 @@ export default function TaskForm({
   const [formData, setFormData] = useState<TaskFormData>(emptyForm);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<{ title?: string }>({});
+  const [successMessage, setSuccessMessage] = useState<string | null>(null)
 
   // Populate form on edit
   useEffect(() => {
@@ -76,6 +77,7 @@ export default function TaskForm({
     if (!validate()) return;
 
     setIsSubmitting(true);
+    setSuccessMessage(null) // clearing old message
 
     try {
       onSubmit(formData);
@@ -83,6 +85,13 @@ export default function TaskForm({
       if (!initialData) {
         setFormData(emptyForm);
       }
+
+      setSuccessMessage(initialData ? "Task Updated" : "Task Created")
+
+      // Clear after seconds
+      setTimeout(() => {
+        setSuccessMessage(null)
+      }, 3000)
     }
     finally {
       setIsSubmitting(false);
@@ -94,6 +103,13 @@ export default function TaskForm({
     setErrors({});
     onCancel?.();
   };
+
+  // Button text state
+  const buttonLabel = isSubmitting
+    ? "Submitting..."
+    : initialData
+      ? "Update Task"
+      : "Create Task";
 
   return (
     <div className={styles.formWrapper}>
@@ -153,9 +169,13 @@ export default function TaskForm({
             className="btn-primary full-width"
             disabled={isSubmitting}
           >
-            {initialData ? "Update Task" : "Create Task"}
+            {buttonLabel}
           </button>
         </div>
+
+        {successMessage && (
+          <p>{successMessage}</p>
+        )}
       </form>
     </div>
   );
